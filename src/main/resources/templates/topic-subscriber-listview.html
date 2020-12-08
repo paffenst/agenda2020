@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<body>
+<nav th:replace="fragments :: navigation"></nav>
+<div class="container-fluid">
+    <div class="row justify-content-center bg-light">
+        <div class="col-8">
+            <h4 class="display-5">
+                Abonnenten-Übersicht  <a href="/topics" class="btn btn-primary mr-13">Zurück zu Topics</a>
+            </h4>
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Name</th>
+                </tr>
+                </thead>
+                <tr th:each="subscriber : ${subscribers}">
+                    <td th:text="${subscriber.name}"/>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</head>
+<th:block th:replace="fragments :: scripts"/>
+</body>
+</html>

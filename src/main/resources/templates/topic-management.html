@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head" />
+<body>
+	<nav th:replace="fragments :: navigation"></nav>
+
+	<div class="container-fluid">
+		<div class="row justify-content-center bg-light">
+			<div class="col-12">
+				<h1 class="display-4">
+					Ihr Topic <i th:text="${topic.title}"></i>
+				</h1>
+				<form method="post" th:action="@{/topics/{uuid}/manage/(uuid=${topic.uuid})}"
+					  th:object="${topic}">
+
+					<div class="form-group">
+						<input class="form-control" th:field="*{shortTopicDescription}"
+							   placeholder="Kurze Beschreibung des Topics" minlength="16" maxlength="50"/>
+						<small class="form-text text-muted">Geben Sie eine kurze Beschreibung zum Topic!</small>
+					</div>
+
+					<div class="form-group">
+						<input  class="form-control" th:field="*{longTopicDescription}"
+								placeholder="Lange Beschreibung des Topics" minlength="24" maxlength="300"/>
+						<small class="form-text text-muted">Geben Sie eine ausführliche Beschreibung zum Topic!</small>
+					</div>
+					<button type="submit" class="btn btn-primary">Speichern</button>
+				</form>
+			</div>
+		</div>
+		<div class="row row-cols-md-12 bg-light">
+			<h1 class="display-4">
+				Ihre Tasks zum Topic
+				<a th:href="'/topics/'+${topic.uuid}+'/createTask'" class="btn btn-primary">Neuen Task erstellen</a>
+			</h1>
+
+			<div class="card col-md-12" th:each="t : ${tasks}">
+				<div class="row align-items-center">
+					<div class="col-md-7">
+						<div class="card-body">
+							<h5 class="card-title" th:text="${t.title}">Card title</h5>
+							<h6 class="card-subtitle mb-2 text-muted" th:text="${t.shortDescription}"/>
+							<p class="card-text text-danger" th:if="${t.erledigtStatusCount!=1}"
+							   th:text="${t.erledigtStatusCount}+' Abonnenten haben den Task abgeschlossen'">Keine Abonnenten
+								haben den Task abgeschlossen</p>
+							<p class="card-text text-success" th:if="${t.erledigtStatusCount==1}"
+							   th:text="${t.erledigtStatusCount}+' Abonnent hat den Task abgeschlossen'">Keine Abonnenten
+								haben den Task abgeschlossen</p>
+						</div>
+						</div>
+					</div>
+					<div class="col-md-5">
+						<div class="btn-group btn-group-md pb-3">
+							<a th:href="'/tasks/'+${t.id}+'/manage'">
+								<button class="btn btn-primary mr-1">Verwalten</button>
+							</a>
+							<form th:action="'/tasks/'+${t.id}+'/delete'" method="post">
+								<button class="btn btn-danger" type="submit">Löschen</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<th:block th:replace="fragments :: scripts">
+</body>
+</html>

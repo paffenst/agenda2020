@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head"/>
+<body>
+<nav th:replace="fragments :: navigation"></nav>
+
+<div class="container-fluid">
+    <div class="row justify-content-center bg-light">
+        <div class="col-12">
+            <h4 class="display-4">Neuen Anwender erstellen</h4>
+
+            <form id="formName" th:action="@{/users}" th:object="${newUser}"
+                  method="post">
+
+                <div class="form-group ">
+                    <input th:field="*{login}" class="form-control"
+                           placeholder="Login" minlength="4" maxlength="32"/>
+                    <small class="form-text text-muted">Ihr Login mind. 4 Zeichen</small>
+                </div>
+
+                <div class="form-group ">
+                    <input th:field="*{name}" class="form-control"
+                           placeholder="Name" minlength="4" maxlength="32"/>
+                    <small class="form-text text-muted">Ihr Name, 4 bis 32 Zeichen erlaubt</small>
+                </div>
+
+                <div class="form-group">
+                    <input th:field="*{password}" class="form-control"
+                           placeholder="Password" type="password" minlength="8" maxlength="32"/>
+                    <small class="form-text text-muted">Ihr Password mind. 8 bis max. 32 Zeichen</small>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Erstellen!</button>
+                <a href="/users" class="btn btn-danger">Abbrechen</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="fragments :: scripts"/>
+</body>
+</html>

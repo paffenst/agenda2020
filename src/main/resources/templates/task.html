@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head th:replace="fragments :: head" />
+<body>
+	<nav th:replace="fragments :: navigation"></nav>
+
+	<h2>Abonnenten-Ansicht für Task <i th:text="${task.title}"></i></h2>
+    <p class="bg-info text-white" th:text="${task.longDescription}"/>
+
+	<div class="container-fluid">
+		<div class="row justify-content-center bg-light">
+			<div class="col-12">
+				<form th:action="@{/tasks/{id}(id=${task.id})}" th:object="${status}" method="post">
+					<div class="form-group ">
+						<label for="commentTextArea">Ihr Kommentar zum Task.</label>
+						<textarea th:field="*{comment}" class="form-control" id="commentTextArea"
+							  placeholder="Ihr Kommentar" minlength="3" maxlength="500"/></textarea>
+
+						<small class="form-text text-muted">Mind. 3 Zeichen und max. 500 Zeichen erlaubt.</small>
+						<div class="btn-group">
+							<button type="submit" class="btn btn-primary mr-1">Kommentar speichern</button>
+							<a th:href="'/tasks'" class="btn btn-danger">Zurück zur Task-Übersicht</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<th:block th:replace="fragments :: scripts">
+</body>
+</html>

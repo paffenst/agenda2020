@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head" />
+<body>
+<nav th:replace="fragments :: navigation"></nav>
+
+<div class="container-fluid">
+    <div class="row justify-content-center bg-light">
+        <div class="col-12">
+            <h4 class="display-4">Task ändern für <i th:text="${task.title}">Titel</i></h4>
+
+            <form
+                    th:action="@{/tasks/{id}/manage/(id=${task.id})}"
+                    th:object="${task}" method="post">
+
+                <div class="form-group ">
+                    <input th:field="*{shortDescription}" class="form-control"
+                           placeholder="Kurze Beschreibung" minlength="8" maxlength="50"/>
+                    <small class="form-text text-muted">Geben Sie eine kurze Beschreibung zum Task!</small>
+                </div>
+
+                <div class="form-group ">
+                    <input th:field="*{longDescription}" class="form-control"
+                           placeholder="Lange Beschreibung" minlength="16" maxlength="200"/>
+                    <small class="form-text text-muted">Geben Sie eine ausführliche Beschreibung zum Task!</small>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Speichern</button>
+                <a th:href="'/topics/'+${task.topic.uuid}+'/manage'"
+                   class="btn btn-danger">Zurück zum Topic</a>
+            </form>
+        </div>
+    </div>
+    <div class="row justify-content-center bg-light">
+        <div class="col-12">
+            <h4 class="display-4">Kommentare</h4>
+            <span th:if="${#lists.isEmpty(statusComment)}">Keine Kommentare gefunden! </span>
+        </div>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 bg-light">
+        <div class="col mb-4" th:each="status : ${statusComment}">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${status.user.name}">Kommentator</h5>
+                    <p class="card-text" th:text="${status.comment}">Kommentar</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <th:block th:replace="fragments :: scripts">
+</body>
+</html>

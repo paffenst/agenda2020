@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head" />
+<body>
+	<nav th:replace="fragments :: navigation"></nav>
+
+	<div class="container-fluid">
+		<div class="row justify-content-center bg-light">
+			<div class="col-12">
+				<h4 class="display-4">Eigene Aufgaben</h4>
+				<span th:if="${#lists.size(tasks)==0}">Sie haben keine
+					Aufgaben!</span>
+			</div>
+		</div>
+		<div class="row row-cols-md-12 bg-light">
+			<div class="card col-md-12" th:each="t : ${tasks}" th:classappend="${t.status.status.toString()=='FERTIG'} ? text-secondary : text-primary">
+				<div class="row align-items-center">
+					<div class="col-md-8">
+						<div class="card-body">
+							<h5 class="card-title" th:text="${t.title}">Card title</h5>
+							<h6 class="card-subtitle mb-2 text-muted"
+								th:text="'In '+${t.topic.title}">Card subtitle</h6>
+
+							<p class="card-text" th:text="${t.shortDescription}"/>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<a th:href="'/tasks/'+${t.id}" class="btn btn-sm btn-primary">Öffnen</a>
+						<form th:unless="${t.status.status.toString()=='FERTIG'}"
+							  id="formName" th:action="@{/tasks/{id}/check(id=${t.id})}"
+							  th:object="${t}" method="post">
+							<button type="submit" class="btn btn-sm btn-success"> Done!</button>
+						</form>
+						<form method="post"
+							  th:action="@{/tasks/{id}/reset(id=${t.id})}"
+							  th:if="${t.status.status.toString()=='FERTIG'}" th:object="${t}">
+							<button class="btn btn-sm btn-secondary" type="submit">Zurücksetzen</button>
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<th:block th:replace="fragments :: scripts">
+</body>
+</html>

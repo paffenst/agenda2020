@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head"/>
+<body>
+<nav th:replace="fragments :: navigation"></nav>
+<div class="container-fluid">
+    <div class="row justify-content-center bg-light">
+        <div class="col-12">
+            <h4 class="display-4">
+                Anwender
+                <a href="/users/create" class="btn btn-primary">Anwender anlegen</a>
+            </h4>
+        </div>
+    </div>
+    <div class="row justify-content-center bg-light">
+        <div class="col-8">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Login</th>
+                    <th scope="col">Name</th>
+                    <th scope="col"># Topics</th>
+                    <th scope="col"># Abos</th>
+                </tr>
+                </thead>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.login} "/>
+                    <td th:text="${user.name} "/>
+                    <td th:text="${user.topicCount} "/>
+                    <td th:text="${user.subscriptionCount} "/>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<th:block th:replace="fragments :: scripts"/>
+</body>
+</html>

@@ -1,0 +1,10 @@
+body{
+    background-color: #e3f2fd;
+}
+nav{
+	background-color: #e3f2fd;
+}
+
+.table .thead-dark th {
+  background-color: #4c5d75;
+}
