@@ -1,4 +1,4 @@
-package edu.hm.cs.katz.swt2.agenda;
+package agenda;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

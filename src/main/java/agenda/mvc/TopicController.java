@@ -22,7 +22,7 @@ import java.util.List;
  * View-Template (Thymeleaf-Vorlage) und stellen Daten zusammen, die darin
  * dargestellt werden. Dafür verwenden Sie Methoden der Service-Schicht.
  *
- * @author Pavel St. (paffen)
+ * @author Pavel St. (paffenst)
  */
 @Controller
 public class TopicController extends AbstractController {

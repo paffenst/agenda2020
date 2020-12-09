@@ -1,6 +1,6 @@
-package edu.hm.cs.katz.swt2.agenda.it;
+package agenda.it;
 
-import edu.hm.cs.katz.swt2.agenda.service.UserService;
+import agenda.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package edu.hm.cs.katz.swt2.agenda.service;
+package agenda.service;
 
 import edu.hm.cs.katz.swt2.agenda.persistence.User;
 import edu.hm.cs.katz.swt2.agenda.persistence.UserRepository;
@@ -27,12 +27,12 @@ public class UserServiceTest {
     @Test
     public void createUserSuccess() {
         Mockito.when(userRepository.existsById("tiffy")).thenReturn(false);
-        userService.legeAn("tiffy","Tiffy","Tiffy123!",false);
+        userService.legeAn("tiffy", "Tiffy", "Tiffy123!", false);
 
         ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);
         Mockito.verify(userRepository).save(userCaptor.capture());
         Mockito.verifyNoMoreInteractions(userRepository);
-        assertEquals("tiffy",userCaptor.getValue().getLogin());
+        assertEquals("tiffy", userCaptor.getValue().getLogin());
     }
 
     @Test
@@ -44,7 +44,7 @@ public class UserServiceTest {
     }
 
     @Test
-    void createUserFailsForEmptyLogin(){
+    void createUserFailsForEmptyLogin() {
         assertThrows(ValidationException.class, () -> {
             userService.legeAn(" ", "Tiffy", "Tiffy123!", false);
         });
