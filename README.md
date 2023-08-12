@@ -5,10 +5,10 @@ a. Participants * subscribe to the topic and thus always have one Overview of al
 
 
 ## Technologies Used
-• Thymeleaf
 • Java
 • Maven
 • Spring Boot
+• Thymeleaf
 • HTML
 • JUnit
 • Bootstrap
